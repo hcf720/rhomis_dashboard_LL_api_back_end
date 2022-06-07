@@ -37,6 +37,8 @@ const lcu2pppKeys = [
     // "value_farm_products_consumed_lcu_per_hh_per_year",
 ]
 
+// doc是单条记录，对于单条记录，遍历其properties（keys），如果property名称是在stringKeys数组里的
+// 直接将该prop（key-value）加入parsedData，否则进行parseFloat转换为Number再存入
 const parser = (doc, stringKeys) => {
     let parsedData = {}
     for (const prop in doc) {
@@ -59,7 +61,7 @@ const getIndicatorData = async () => {
     // 3. Select needed fields
     const selectedData = extData.map( e => lodash.pick(e, selectKeys) )
     // 4. Parse numbers
-    const parsedData = selectedData.map( e=> parser(e, stringKeys))
+    const parsedData = selectedData.map( e => parser(e, stringKeys))
     console.log(parsedData.length + ' records.')
     return parsedData
 }
