@@ -65,7 +65,7 @@ const pie = async () => {
     for (var i in data) {
         // Does it need illegal value like null check here?
         const year = data[i].year
-        const days = (year % 4 == 0 && year % 100 != 0) ? 366 : 365
+        const days = (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) ? 366 : 365
         const mae = data[i].hh_size_mae
         const rate = data[i].currency_conversion_lcu_to_ppp
         if (!year || !days || !mae || !rate) {
